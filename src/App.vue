@@ -16,23 +16,26 @@
     </v-toolbar>
 
     <v-content>
-      <HelloWorld/>
+      <!-- <HelloWorld /> -->
+      <BookList />
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+// import HelloWorld from "./components/HelloWorld";
+import BookList from "./components/BookList";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
+    // HelloWorld,
+    BookList
   },
-  data () {
+  data() {
     return {
       //
-    }
+    };
   }
-}
+};
 </script>
