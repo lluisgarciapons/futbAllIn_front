@@ -1,11 +1,12 @@
 <template>
-  <div v-if="!$apollo.loading">
-    <h3>Welcome Back, {{ user.name }}</h3>
-    <ul id="book-list">
-      <li v-for="book in books" :key="book.id">{{ book.name }}</li>
-    </ul>
-  </div>
+  <v-content>
+    <v-layout fill-height align-center justify-center white--text column>
+      <img :src="user.photoURL" alt="avatar" class="user-avatar" />
+      <h2 class="name">{{ user.name }}</h2>
+    </v-layout>
+  </v-content>
 </template>
+
 <script>
 import gql from "graphql-tag";
 import { mapGetters } from "vuex";
@@ -30,11 +31,12 @@ export default {
           user(id: $id) {
             id
             name
+            photoURL
           }
         }
       `,
       variables() {
-        return { id: this.userId };
+        return { id: this.userId() };
       }
     }
   },
@@ -45,3 +47,14 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.user-avatar {
+  height: 150px;
+  border-radius: 50%;
+}
+.name {
+  font-weight: 100;
+  letter-spacing: 2px;
+}
+</style>

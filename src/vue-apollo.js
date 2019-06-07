@@ -41,10 +41,18 @@ const defaultOptions = {
   // Override default cache
   cache: new InMemoryCache({
     freezeResults: false
-  })
+  }),
 
   // Override the way the Authorization header is set
   // getAuth: (tokenName) => ...
+
+  // Override the way the Authorization header is set
+  getAuth: () => {
+    // get the authentication token from local storage if it exists
+    const token = `Bearer ${localStorage.getItem("jwtToken")}`;
+    // return the headers to the context so httpLink can read them
+    return token || "";
+  }
 
   // Additional ApolloClient options
   // apollo: { ... }

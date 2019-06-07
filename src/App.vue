@@ -1,41 +1,37 @@
 <template>
   <v-app>
-    <v-toolbar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
-    </v-toolbar>
-
-    <v-content>
-      <!-- <HelloWorld /> -->
-      <BookList />
+    <v-content class="background">
+      <Toolbar v-if="isAuthenticated" />
+      <router-view />
     </v-content>
+    <Footer />
   </v-app>
 </template>
 
 <script>
-// import HelloWorld from "./components/HelloWorld";
-import BookList from "./components/BookList";
+import Footer from "./components/Footer.vue";
+import Toolbar from "./components/Toolbar";
+import { mapGetters } from "vuex";
 
 export default {
   name: "App",
-  components: {
-    // HelloWorld,
-    BookList
-  },
+  components: { Footer, Toolbar },
   data() {
     return {
       //
     };
+  },
+  computed: {
+    ...mapGetters("auth", {
+      isAuthenticated: "isAuthenticated"
+    })
   }
 };
 </script>
+<style>
+.background {
+  background-color: black;
+  /* min-height: 100vh - 100px; */
+}
+</style>
+
