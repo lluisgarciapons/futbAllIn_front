@@ -1,9 +1,9 @@
 import jwt_decode from "jwt-decode";
 import router from "../../router";
+import axios from "axios";
 
 import setAuthToken from "../../utils/setAuthToken";
 import isEmpty from "../../validation/is-empty";
-import axios from "axios";
 
 // const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -29,7 +29,9 @@ const actions = {
   },
 
   logout: context => {
-    axios.get("/auth/logout", () => {
+    console.log("logou");
+    axios.get("/auth/logout").then(response => {
+      console.log(response);
       localStorage.removeItem("jwtToken");
       context.commit("LOGOUT");
       router.push("/login");

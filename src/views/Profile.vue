@@ -36,7 +36,7 @@ export default {
         }
       `,
       variables() {
-        return { id: this.userId() };
+        return { id: this.userId };
       }
     }
   },

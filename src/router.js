@@ -37,7 +37,12 @@ const router = new Router({
       component: () => import("./views/Profile.vue"),
       meta: { requiresAuth: true }
     },
-
+    {
+      path: "/createPlayer",
+      name: "createPlayer",
+      component: () => import("./views/CreatePlayer.vue"),
+      meta: { requiresAuth: true }
+    },
     {
       path: "*",
       redirect: "/login"

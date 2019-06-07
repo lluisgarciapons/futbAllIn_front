@@ -1,8 +1,28 @@
 <template>
   <div>
-    <v-navigation-drawer v-model="drawer" clipped fixed app dark>
+    <v-navigation-drawer
+      class="drawer"
+      v-model="drawer"
+      width="250"
+      clipped
+      fixed
+      app
+      dark
+    >
+      <v-list dense class="pa-2">
+        <v-list-tile v-if="!$apollo.loading" avatar>
+          <v-list-tile-avatar>
+            <img :src="user.photoURL" />
+          </v-list-tile-avatar>
+
+          <v-list-tile-content>
+            <v-list-tile-title>{{ user.name }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+      <v-divider />
       <v-list dense>
-        <v-list-tile>
+        <v-list-tile to="/dashboard">
           <v-list-tile-action>
             <v-icon>dashboard</v-icon>
           </v-list-tile-action>
@@ -10,12 +30,23 @@
             <v-list-tile-title>Dashboard</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+      </v-list>
+      <v-spacer></v-spacer>
+      <v-list dense>
         <v-list-tile>
           <v-list-tile-action>
             <v-icon>settings</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>Settings</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile @click="logout()">
+          <v-list-tile-action>
+            <v-icon>logout</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Logout</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -27,7 +58,10 @@
       <!-- <img class="toolbar-title-logo" src="/images/word-red.png" alt="title" /> -->
       <!-- <img class="toolbar-f-logo" src="/images/f.png" alt="f" /> -->
       <v-spacer></v-spacer>
-      <v-btn icon>
+      <v-btn icon to="/createPlayer">
+        <v-icon>add</v-icon>
+      </v-btn>
+      <v-btn icon to="/profile">
         <v-icon>account_circle</v-icon>
       </v-btn>
     </v-toolbar>
@@ -36,15 +70,53 @@
 
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+import gql from "graphql-tag";
+
 export default {
   data() {
     return {
       drawer: null
     };
+  },
+  apollo: {
+    user: {
+      query: gql`
+        query getUser($id: ID!) {
+          user(id: $id) {
+            id
+            name
+            photoURL
+            player {
+              id
+              username
+            }
+          }
+        }
+      `,
+      variables() {
+        return { id: this.userId };
+      }
+    }
+  },
+  methods: {
+    ...mapActions("auth", {
+      logout: "logout"
+    })
+  },
+  computed: {
+    ...mapGetters("auth", {
+      userId: "userId"
+    })
   }
 };
 </script>
 <style scoped>
+.drawer {
+  display: flex;
+  flex-direction: column;
+}
+
 .toolbar-title-logo {
   height: 40px;
 }
