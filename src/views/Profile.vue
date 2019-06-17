@@ -1,8 +1,8 @@
 <template>
   <v-content>
     <v-layout fill-height align-center justify-center white--text column>
-      <img :src="user.photoURL" alt="avatar" class="user-avatar" />
-      <h2 class="name">{{ user.name }}</h2>
+      <img :src="user.avatar" alt="avatar" class="user-avatar" />
+      <h2 class="name">{{ user.username }}</h2>
     </v-layout>
   </v-content>
 </template>
@@ -30,8 +30,8 @@ export default {
         query getUser($id: ID!) {
           user(id: $id) {
             id
-            name
-            photoURL
+            username
+            avatar
           }
         }
       `,

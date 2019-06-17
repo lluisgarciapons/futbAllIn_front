@@ -48,12 +48,8 @@ export default {
         query getUser($id: ID!) {
           user(id: $id) {
             id
-            name
-            photoURL
-            player {
-              id
-              username
-            }
+            username
+            avatar
           }
         }
       `,

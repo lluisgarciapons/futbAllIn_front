@@ -1,6 +1,6 @@
 <template>
   <div v-if="!$apollo.queries.user.loading">
-    <no-player-alert v-if="user.player === null" />
+    <!-- <no-player-alert v-if="user.player === null" /> -->
     <v-container>
       <v-layout justify-center align-center white--text mb-3>
         <h1 class="dashboard">dash</h1>
@@ -25,12 +25,12 @@
 import gql from "graphql-tag";
 import { mapGetters } from "vuex";
 import MatchCard from "../components/MatchCard";
-import NoPlayerAlert from "../components/NoPlayerAlert";
+// import NoPlayerAlert from "../components/NoPlayerAlert";
 
 export default {
   components: {
-    "v-match": MatchCard,
-    "no-player-alert": NoPlayerAlert
+    "v-match": MatchCard
+    // "no-player-alert": NoPlayerAlert
   },
   data() {
     return {
@@ -84,11 +84,8 @@ export default {
         query getUser($id: ID!) {
           user(id: $id) {
             id
-            name
-            player {
-              id
-              username
-            }
+            username
+            avatar
           }
         }
       `,

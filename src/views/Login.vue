@@ -19,7 +19,6 @@ import { mapActions } from "vuex";
 export default {
   created() {
     if (this.$route.query.hasOwnProperty("code")) {
-      console.log(this.$route.query.code);
       let code = this.$route.query.code;
       this.loginUserGoogle(code);
     }

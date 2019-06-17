@@ -12,11 +12,11 @@
       <v-list dense class="pa-2">
         <v-list-tile v-if="!$apollo.loading" avatar>
           <v-list-tile-avatar>
-            <img :src="user.photoURL" />
+            <img :src="user.avatar" />
           </v-list-tile-avatar>
 
           <v-list-tile-content>
-            <v-list-tile-title>{{ user.name }}</v-list-tile-title>
+            <v-list-tile-title>{{ user.username }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -85,12 +85,8 @@ export default {
         query getUser($id: ID!) {
           user(id: $id) {
             id
-            name
-            photoURL
-            player {
-              id
-              username
-            }
+            username
+            avatar
           }
         }
       `,

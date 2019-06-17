@@ -16,15 +16,29 @@ const actions = {
   loginUserGoogle: (context, token) => {
     if (token !== undefined && token !== "") {
       // Set Token to Auth Header
-      setAuthToken(token);
+      axios
+        .get("/checkLogin", {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+        .then(res => {
+          console.log("!!!", res);
 
-      // Set token to local storage
-      localStorage.setItem("jwtToken", token);
+          setAuthToken(token);
 
-      // Decode token to get user data
-      const decoded = jwt_decode(token);
+          // Set token to local storage
+          localStorage.setItem("jwtToken", token);
 
-      context.commit("SET_CURRENT_USER", decoded);
+          // Decode token to get user data
+          const decoded = jwt_decode(token);
+
+          context.commit("SET_CURRENT_USER", decoded);
+        })
+        .catch(err => {
+          console.log(err.response);
+          context.dispatch("logout");
+        });
     }
   },
 
