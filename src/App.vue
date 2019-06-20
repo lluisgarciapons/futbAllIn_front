@@ -30,6 +30,7 @@ export default {
 </script>
 <style>
 .background {
+  color: white;
   background-color: black;
   /* min-height: 100vh - 100px; */
 }

@@ -33,7 +33,7 @@
       </v-list>
       <v-spacer></v-spacer>
       <v-list dense>
-        <v-list-tile>
+        <v-list-tile to="/settings">
           <v-list-tile-action>
             <v-icon>settings</v-icon>
           </v-list-tile-action>
@@ -58,7 +58,7 @@
       <!-- <img class="toolbar-title-logo" src="/images/word-red.png" alt="title" /> -->
       <!-- <img class="toolbar-f-logo" src="/images/f.png" alt="f" /> -->
       <v-spacer></v-spacer>
-      <v-btn icon to="/createPlayer">
+      <v-btn icon to="/teams">
         <v-icon>add</v-icon>
       </v-btn>
       <v-btn icon to="/profile">
@@ -118,6 +118,13 @@ export default {
 }
 .toolbar-f-logo {
   height: 40px;
+}
+
+.v-list__tile--active .v-list__tile__action:first-of-type .v-icon {
+  color: #c00000;
+}
+.v-navigation-drawer > .v-list .v-list__tile--active .v-list__tile__title {
+  color: white;
 }
 </style>
 

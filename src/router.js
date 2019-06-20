@@ -38,9 +38,15 @@ const router = new Router({
       meta: { requiresAuth: true }
     },
     {
-      path: "/createPlayer",
-      name: "createPlayer",
-      component: () => import("./views/CreatePlayer.vue"),
+      path: "/settings",
+      name: "settings",
+      component: () => import("./views/profileSettings.vue"),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: "/teams",
+      name: "teams",
+      component: () => import("./views/Teams.vue"),
       meta: { requiresAuth: true }
     },
     {
