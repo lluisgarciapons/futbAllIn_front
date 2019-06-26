@@ -17,7 +17,11 @@
 
       <v-flex xs12 md6>
         <h3>Choose your avatar</h3>
-        <v-avatars :image="user.photoURL" @update="onUpdateChild"></v-avatars>
+        <v-avatars
+          :image="user.photoURL"
+          @update="onUpdateChild"
+          type="avatars"
+        ></v-avatars>
       </v-flex>
       <v-flex xs12>
         <v-btn @click="handleClick()" outline dark color="success" round>

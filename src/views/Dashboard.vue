@@ -2,7 +2,7 @@
   <div v-if="!$apollo.queries.user.loading">
     <!-- <no-player-alert v-if="user.player === null" /> -->
     <v-container>
-      <v-layout justify-center align-center white--text mb-3>
+      <v-layout justify-center align-center white--text>
         <h1 class="dashboard">dash</h1>
         <img class="f-logo" src="/images/f.png" alt="futb-all-in" />
         <h1 class="dashboard">board</h1>
@@ -12,11 +12,38 @@
       /></v-layout>
 
       <v-layout v-else wrap white--text>
-        <v-flex><h3 class="matches-title">TODAY'S MATCHES</h3></v-flex>
-        <v-flex xs12 v-for="match in dayMatches" :key="match.id">
-          <v-match :match="match"></v-match>
+        <v-flex>
+          <v-tabs v-model="tab" color="black" dark grow>
+            <v-tabs-slider color="#C00000"></v-tabs-slider>
+
+            <v-tab v-for="item in items" :key="item">
+              {{ item }}
+            </v-tab>
+          </v-tabs>
         </v-flex>
+        <!-- <v-flex><h3 class="matches-title">TODAY'S MATCHES</h3></v-flex> -->
       </v-layout>
+
+      <v-tabs-items v-model="tab">
+        <v-tab-item>
+          <v-card flat>
+            <!-- <v-card-text> -->
+            <div xs12 v-for="match in dayMatches" :key="match.id">
+              <v-match :match="match"></v-match>
+            </div>
+            <!-- </v-card-text> -->
+          </v-card>
+        </v-tab-item>
+        <v-tab-item>
+          <v-card flat>
+            <!-- <v-card-text> -->
+            <div xs12 v-for="match in dayMatches" :key="match.id">
+              <v-match :match="match"> </v-match>
+            </div>
+            <!-- </v-card-text> -->
+          </v-card>
+        </v-tab-item>
+      </v-tabs-items>
     </v-container>
   </div>
 </template>
@@ -35,7 +62,11 @@ export default {
   data() {
     return {
       // date: new Date()
-      date: new Date("2019-06-02T22:01:43.985Z")
+      date: new Date("2019-06-02T22:01:43.985Z"),
+      tab: null,
+      items: ["Next Matches", "My Matches"],
+      text:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     };
   },
   apollo: {

@@ -1,7 +1,7 @@
 <template>
   <v-radio-group v-model="radioGroup">
     <v-layout id="avatars-container" wrap>
-      <v-flex>
+      <v-flex v-if="this.type === 'avatars'">
         <label class="avatars"
           ><v-radio type="radio" name="avatar" :value="image" />
           <img class="avatar" :src="image" alt="avatar" />
@@ -9,8 +9,16 @@
       </v-flex>
       <v-flex v-for="(avatar, index) in avatars" :key="index">
         <label class="avatars"
-          ><v-radio type="radio" name="avatar" :value="'uploads/' + avatar" />
-          <img class="avatar" :src="'/uploads/' + avatar" alt="avatar" />
+          ><v-radio
+            type="radio"
+            name="avatar"
+            :value="'uploads/' + type + '/' + avatar"
+          />
+          <img
+            class="avatar"
+            :src="'/uploads/' + type + '/' + avatar"
+            alt="avatar"
+          />
         </label>
       </v-flex>
     </v-layout>
@@ -20,7 +28,7 @@
 <script>
 import axios from "axios";
 export default {
-  props: ["image"],
+  props: ["image", "type"],
   data() {
     return {
       avatars: [],
@@ -29,7 +37,9 @@ export default {
   },
   methods: {
     getAvatars: function() {
-      axios.get("/uploads").then(avatars => (this.avatars = avatars.data));
+      axios
+        .get(`/uploads/${this.type}`)
+        .then(avatars => (this.avatars = avatars.data));
     }
   },
   created() {

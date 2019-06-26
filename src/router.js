@@ -50,6 +50,12 @@ const router = new Router({
       meta: { requiresAuth: true }
     },
     {
+      path: "/createTeam",
+      name: "createTeam",
+      component: () => import("./views/CreateTeam.vue"),
+      meta: { requiresAuth: true }
+    },
+    {
       path: "*",
       redirect: "/login"
     }
